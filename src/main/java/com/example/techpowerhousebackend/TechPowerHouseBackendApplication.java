@@ -1,12 +1,13 @@
 package com.example.techpowerhousebackend;
 
-import org.junit.Test;
+import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class TechPowerHouseBackendSpringbootApplicationTest {
+public class TechPowerHouseBackendApplication {
 
-    @Test
-    public void contextLoads() {
+    public static void main(String[] args) {
+        SpringApplication.run(TechPowerHouseBackendApplication.class, args);
     }
+
 }

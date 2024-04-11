@@ -1,1 +1,25 @@
-spring.application.name=TechPowerHouse-Backend
+spring:
+  security:
+    oauth2:
+      resourceserver:
+        jwt:
+          issuer-uri: http://localhost:8080/realms/techpowerhouse
+          jwk-set-uri: http://localhost:8080/realms/techpowerhouse/protocol/openid-connect/certs
+  application:
+    name: TechPowerHouse
+  datasource:
+    url: jdbc:postgresql://localhost:5432/techpowerhouse
+    driver-class-name: org.postgresql.Driver
+    username: 'postgres'
+    password: 130701
+  jpa:
+    hibernate:
+        show_sql: true # Mostra le query SQL generate da Hibernate (utile per scopi di debug)
+        ddl-auto: update
+server:
+  port: 8081
+
+jwt:
+  auth:
+    converter:
+      principle-attribute: preferred_username
