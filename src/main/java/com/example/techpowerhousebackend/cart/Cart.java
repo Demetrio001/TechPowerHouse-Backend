@@ -23,7 +23,7 @@ public class Cart implements Serializable {
 
     @OneToOne(targetEntity = User.class)
     @JoinColumn(name = "user_id")
-    @MapsId
+    //@MapsId
     @JsonIgnore
     @ToString.Exclude
     private User user;

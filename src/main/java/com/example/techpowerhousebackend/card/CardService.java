@@ -30,6 +30,25 @@ public class CardService implements CardServiceInterface {
         }
         return card;
     }
+    @Override
+    @Transactional(readOnly = true)
+    public List<Card> advancedSearch(String name, String creator, String publisher, String category,
+                                     int pageNumber, int pageSize, String sortBy) {
+
+        PageRequest pageable = switch (sortBy) {
+            case "Titolo A-Z" -> PageRequest.of(pageNumber, pageSize, Sort.by("name").ascending());
+            case "Titolo Z-A" -> PageRequest.of(pageNumber, pageSize, Sort.by("name").descending());
+            case "Prezzo crescente" -> PageRequest.of(pageNumber, pageSize, Sort.by("price").ascending());
+            case "Prezzo decrescente" -> PageRequest.of(pageNumber, pageSize, Sort.by("price").descending());
+            default -> PageRequest.of(pageNumber, pageSize, Sort.by("id"));
+        };
+        Page<Card> pagedResult = cardRepository.advancedSearch(name,creator,publisher,category,pageable);
+        if(pagedResult.hasContent()) {
+            return pagedResult.getContent();
+        }
+        return new ArrayList<>();
+    }
+
 
     @Override
     @Transactional(readOnly = true)
@@ -44,9 +63,9 @@ public class CardService implements CardServiceInterface {
 
     @Override
     @Transactional(readOnly = true)
-    public List<Card> findByTitle(String title, int pageNumber, int pageSize, String sortBy) {
+    public List<Card> findByTitle(String name, int pageNumber, int pageSize, String sortBy) {
         Pageable pageable = PageRequest.of(pageNumber, pageSize, Sort.by(sortBy));
-        Page<Card> pagedResult = cardRepository.findByTitle(title, pageable);
+        Page<Card> pagedResult = cardRepository.findByTitle(name, pageable);
         if(pagedResult.hasContent()) {
             return pagedResult.getContent();
         }

@@ -3,6 +3,7 @@ package com.example.techpowerhousebackend.card;
 import com.example.techpowerhousebackend.cartDetail.CartDetail;
 import com.example.techpowerhousebackend.orderDetail.OrderDetail;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import jakarta.persistence.*;
 import jakarta.validation.constraints.*;
 import lombok.Data;
@@ -29,6 +30,10 @@ public class Card implements Serializable {
     @NotBlank
     private String creator;
 
+    @Column(name = "publisher")
+    @NotBlank
+    private String publisher;
+
     @Column(name = "category")
     @NotBlank
     private String category;
@@ -42,6 +47,11 @@ public class Card implements Serializable {
     @NotNull
     @PositiveOrZero
     private int quantity;
+
+    @Column(name = "urlImmagine")
+    @NotNull
+    @PositiveOrZero
+    private String urlImmagine;
 
     @Version
     @JsonIgnore

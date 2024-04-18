@@ -21,9 +21,9 @@ import java.util.List;
 public class Registration {
     public void keycloakRegistration(RegistrationRequest registrationRequest) throws KeycloackRegistrationException {
         try {
-            String usernameAdmin = "romeodemetrio01@gmail.com";
-            String passwordAdmin = "130701";
-            String clientName = "TechPowerHouse";
+            String usernameAdmin = "Romeodemetrio01@gmail.com";
+            String passwordAdmin = "13072001";
+            String clientName = "springboot-keycloak";
             String role = "user";
             String serverUrl = "http://localhost:8080";
             String realm = "techpowerhouse";

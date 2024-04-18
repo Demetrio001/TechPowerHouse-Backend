@@ -6,6 +6,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.annotation.security.RolesAllowed;
 import java.util.List;
 
 @RestController
@@ -38,6 +39,22 @@ public class CardController {
                                         @RequestParam(value = "sortBy", defaultValue = "id") String sortBy) {
 
         List<Card> cards = this.cardService.findByTitle(name, pageNumber, pageSize, sortBy);
+        if (cards.isEmpty()) {
+            return new ResponseEntity<>("No cards found", HttpStatus.NOT_FOUND);
+        }
+        return new ResponseEntity<>(cards, HttpStatus.OK);
+    }
+
+    @GetMapping("/cards/advancedSearch")
+    public ResponseEntity<?> advancedSearch(@RequestParam(value = "name", defaultValue = "") String name,
+                                            @RequestParam(value = "creator", defaultValue = "") String creator,
+                                            @RequestParam(value = "publisher", defaultValue = "") String publisher,
+                                            @RequestParam(value = "category", defaultValue = "") String category,
+                                            @RequestParam(value = "pageNumber", defaultValue = "0") int pageNumber,
+                                            @RequestParam(value = "pageSize", defaultValue = "10") int pageSize,
+                                            @RequestParam(value = "sortBy", defaultValue = "id") String sortBy) {
+
+        List<Card> cards = cardService.advancedSearch(name, creator, publisher, category, pageNumber, pageSize, sortBy);
         if (cards.isEmpty()) {
             return new ResponseEntity<>("No cards found", HttpStatus.NOT_FOUND);
         }
