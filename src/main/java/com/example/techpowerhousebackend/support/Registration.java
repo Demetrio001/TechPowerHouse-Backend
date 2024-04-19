@@ -19,8 +19,11 @@ import java.util.List;
 
 @UtilityClass
 public class Registration {
+
+    // Metodo per registrare un utente su Keycloak
     public void keycloakRegistration(RegistrationRequest registrationRequest) throws KeycloackRegistrationException {
         try {
+            // Parametri di configurazione per la connessione a Keycloak
             String usernameAdmin = "Romeodemetrio01@gmail.com";
             String passwordAdmin = "13072001";
             String clientName = "springboot-keycloak";
@@ -28,6 +31,7 @@ public class Registration {
             String serverUrl = "http://localhost:8080";
             String realm = "techpowerhouse";
 
+            // Creazione dell'istanza Keycloak
             Keycloak keycloak = KeycloakBuilder.builder()
                     .serverUrl(serverUrl)
                     .realm(realm)
@@ -36,41 +40,44 @@ public class Registration {
                     .username(usernameAdmin)
                     .password(passwordAdmin)
                     .build();
-            System.out.println('1');
 
-            User utente = registrationRequest.getUser();
-            UserRepresentation user = new UserRepresentation();
-            user.setEnabled(true);
-            user.setUsername(utente.getEmail());
-            user.setEmail(utente.getEmail());
-            user.setFirstName(utente.getFirstName());
-            user.setLastName(utente.getLastName());
-            user.setAttributes(Collections.singletonMap("origin", List.of("demo")));
-            System.out.println('2');
+            // Ottieni i dettagli dell'utente dalla richiesta di registrazione
+            User user = registrationRequest.getUser();
 
+            // Creazione della rappresentazione dell'utente per Keycloak
+            UserRepresentation userRepresentation = new UserRepresentation();
+            userRepresentation.setEnabled(true);
+            userRepresentation.setUsername(user.getEmail());
+            userRepresentation.setEmail(user.getEmail());
+            userRepresentation.setFirstName(user.getFirstName());
+            userRepresentation.setLastName(user.getLastName());
+            userRepresentation.setAttributes(Collections.singletonMap("origin", List.of("demo")));
+
+            // Ottenimento delle risorse di Keycloak per il realm
             RealmResource realmResource = keycloak.realm(realm);
             UsersResource usersResource = realmResource.users();
-            System.out.println('3');
 
-            Response response = usersResource.create(user);
+            // Creazione dell'utente su Keycloak
+            Response response = usersResource.create(userRepresentation);
             System.out.printf("Response: %s %s%n", response.getStatus(), response.getStatusInfo());
             System.out.println(response.getLocation());
             String userId = CreatedResponseUtil.getCreatedId(response);
             System.out.printf("User created with userId: %s%n", userId);
-            System.out.println('4');
 
-            CredentialRepresentation passwordCred = new CredentialRepresentation();
-            passwordCred.setTemporary(false);
-            passwordCred.setType(CredentialRepresentation.PASSWORD);
-            passwordCred.setValue(registrationRequest.getPassword());
+            // Impostazione della password per l'utente creato
+            CredentialRepresentation passwordCredential = new CredentialRepresentation();
+            passwordCredential.setTemporary(false);
+            passwordCredential.setType(CredentialRepresentation.PASSWORD);
+            passwordCredential.setValue(registrationRequest.getPassword());
             UserResource userResource = usersResource.get(userId);
-            userResource.resetPassword(passwordCred);
-            System.out.println('5');
-            RoleRepresentation testerRealmRole = realmResource.roles().get(role).toRepresentation();
-            userResource.roles().realmLevel().add(Collections.singletonList(testerRealmRole));
-            System.out.println('6');
+            userResource.resetPassword(passwordCredential);
+
+            // Assegnazione del ruolo all'utente
+            RoleRepresentation userRealmRole = realmResource.roles().get(role).toRepresentation();
+            userResource.roles().realmLevel().add(Collections.singletonList(userRealmRole));
 
         } catch (Exception e) {
+            // Gestione delle eccezioni
             throw new KeycloackRegistrationException();
         }
     }

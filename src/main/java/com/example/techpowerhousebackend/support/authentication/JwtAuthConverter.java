@@ -21,19 +21,24 @@ import java.util.stream.Stream;
 @Component
 public class JwtAuthConverter implements Converter<Jwt, AbstractAuthenticationToken> {
 
+    // Converter per ottenere le autorizzazioni dal token JWT
     private final JwtGrantedAuthoritiesConverter jwtGrantedAuthoritiesConverter =
             new JwtGrantedAuthoritiesConverter();
 
+    // Attributo che definisce il nome del claim per il principio (es. username)
     @Value("${jwt.auth.converter.principle-attribute}")
     private String principleAttribute;
 
+    // Metodo per convertire un token JWT in un oggetto di autenticazione Spring Security
     @Override
     public AbstractAuthenticationToken convert(@NonNull Jwt jwt) {
+        // Ottiene le autorizzazioni dal token JWT e le combina con i ruoli delle risorse
         Collection<GrantedAuthority> authorities = Stream.concat(
                 jwtGrantedAuthoritiesConverter.convert(jwt).stream(),
                 extractResourceRoles(jwt).stream()
         ).collect(Collectors.toSet());
 
+        // Crea un oggetto JwtAuthenticationToken con il token JWT, le autorizzazioni e il nome del principio
         return new JwtAuthenticationToken(
                 jwt,
                 authorities,
@@ -41,6 +46,7 @@ public class JwtAuthConverter implements Converter<Jwt, AbstractAuthenticationTo
         );
     }
 
+    // Metodo per ottenere il nome del claim per il principio
     private String getPrincipleClaimName(Jwt jwt) {
         String claimName = JwtClaimNames.SUB;
         if (principleAttribute != null) {
@@ -49,6 +55,7 @@ public class JwtAuthConverter implements Converter<Jwt, AbstractAuthenticationTo
         return jwt.getClaim(claimName);
     }
 
+    // Metodo per estrarre i ruoli delle risorse dal token JWT
     @SuppressWarnings("unchecked")
     private Collection<? extends GrantedAuthority> extractResourceRoles(Jwt jwt) {
         Map<String, Object> realmAccess;
@@ -64,3 +71,4 @@ public class JwtAuthConverter implements Converter<Jwt, AbstractAuthenticationTo
                 .collect(Collectors.toSet());
     }
 }
+

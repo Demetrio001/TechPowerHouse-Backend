@@ -17,31 +17,26 @@ VALUES
     (14, '4080', 'Nvidia', 'MSI', 'TRIPLE', 1524.55 , 6, 1, 'images/4080msi.jpg'),
     (15, '4080 Super', 'Nvidia', 'ASUS', 'TRIPLE', 1259.04 , 5, 1, 'images/4080superasus.jpg'),
     (16, '4080 Super', 'Nvidia', 'MSI', 'TRIPLE', 1278.26 , 4, 1, 'images/4080supermsi.jpg'),
-    (34, '4090', 'Nvidia', 'MSI', 'TRIPLE', 2243.77 , 2, 1, 'images/4090asus.jpg'),
-    (35, '4090', 'Nvidia', 'MSI', 'TRIPLE', 2029.98 , 1, 1, 'images/4090msi.jpg'),
-    (17, '7600', 'AMD', 'XFX', 'DUAL', 269.08 , 1, 1, 'images/7600xfx.jpg'),
-    (18, '7600', 'AMD', 'SAPPHIRE', 'DUAL', 288.44 , 2, 1, 'images/7600sapphire.jpg'),
-    (19, '7600 XT', 'AMD', 'XFX', 'DUAL', 369.04 , 2, 1, 'images/7600xtxfx.jpg'),
-    (20, '7600 XT', 'AMD', 'SAPPHIRE', 'DUAL', 362.66 , 2, 1, 'images/7600xtsapphire.jpg'),
-    (21, '7700 XT', 'AMD', 'XFX', 'TRIPLE', 439.02 , 2, 1, 'images/7700xtxfx.jpg'),
-    (22, '7700 XT', 'AMD', 'SAPPHIRE', 'DUAL', 448.41 , 2, 1, 'images/7700xtsapphire.jpg'),
-    (23, '7800 XT', 'AMD', 'XFX', 'TRIPLE', 539.05 , 2, 1, 'images/7800xtxfx.jpg'),
-    (24, '7800 XT', 'AMD', 'SAPPHIRE', 'DUAL', 563.32 , 2, 1, 'images/7800xtsapphire.jpg'),
-    (25, '7900 XT', 'AMD', 'XFX', 'TRIPLE', 769.07 , 2, 1, 'images/7900xtxfx.jpg'),
-    (26, '7900 XT', 'AMD', 'SAPPHIRE', 'TRIPLE', 881.91 , 2, 1, 'images/7900xtsapphire.jpg'),
-    (27, '7900 GRE', 'AMD', 'XFX', 'TRIPLE', 589.03 , 2, 1, 'images/7900grexfx.jpg'),
-    (28, '7900 GRE', 'AMD', 'SAPPHIRE', 'TRIPLE', 639.98 , 2, 1, 'images/7900gresapphire.jpg'),
-    (29, '7900 XTX', 'AMD', 'XFX', 'TRIPLE', 979.03 , 2, 1, 'images/7900xtxxfx.jpg'),
-    (30, '7900 XTX', 'AMD', 'SAPPHIRE', 'TRIPLE', 1131.17 , 2, 1, 'images/7900xtxsapphire.jpg'),
-    (31, 'A380', 'INTEL ARC', 'ASROCK', 'DUAL', 127.77, 2, 1, 'images/a380.jpg'),
-    (32, 'A580', 'INTEL ARC', 'ASROCK', 'DUAL', 199.58 , 2, 1, 'images/a580.jpg'),
-    (33, 'A770', 'INTEL ARC', 'ASROCK', 'DUAL', 328.28 , 2, 1, 'images/a770.jpg');
+    (17, '4090', 'Nvidia', 'MSI', 'TRIPLE', 2243.77 , 2, 1, 'images/4090asus.jpg'),
+    (18, '4090', 'Nvidia', 'MSI', 'TRIPLE', 2029.98 , 1, 1, 'images/4090msi.jpg'),
+    (19, '7600', 'AMD', 'XFX', 'DUAL', 269.08 , 1, 1, 'images/7600xfx.jpg'),
+    (20, '7600', 'AMD', 'SAPPHIRE', 'DUAL', 288.44 , 2, 1, 'images/7600sapphire.jpg'),
+    (21, '7600 XT', 'AMD', 'XFX', 'DUAL', 369.04 , 2, 1, 'images/7600xtxfx.jpg'),
+    (22, '7600 XT', 'AMD', 'SAPPHIRE', 'DUAL', 362.66 , 2, 1, 'images/7600xtsapphire.jpg'),
+    (23, '7700 XT', 'AMD', 'XFX', 'TRIPLE', 439.02 , 2, 1, 'images/7700xtxfx.jpg'),
+    (24, '7700 XT', 'AMD', 'SAPPHIRE', 'DUAL', 448.41 , 2, 1, 'images/7700xtsapphire.jpg'),
+    (25, '7800 XT', 'AMD', 'XFX', 'TRIPLE', 539.05 , 2, 1, 'images/7800xtxfx.jpg'),
+    (26, '7800 XT', 'AMD', 'SAPPHIRE', 'DUAL', 563.32 , 2, 1, 'images/7800xtsapphire.jpg'),
+    (27, '7900 XT', 'AMD', 'XFX', 'TRIPLE', 769.07 , 2, 1, 'images/7900xtxfx.jpg'),
+    (28, '7900 XT', 'AMD', 'SAPPHIRE', 'TRIPLE', 881.91 , 2, 1, 'images/7900xtsapphire.jpg'),
+    (29, '7900 GRE', 'AMD', 'XFX', 'TRIPLE', 589.03 , 2, 1, 'images/7900grexfx.jpg'),
+    (30, '7900 GRE', 'AMD', 'SAPPHIRE', 'TRIPLE', 639.98 , 2, 1, 'images/7900gresapphire.jpg'),
+    (31, '7900 XTX', 'AMD', 'XFX', 'TRIPLE', 979.03 , 2, 1, 'images/7900xtxxfx.jpg'),
+    (32, '7900 XTX', 'AMD', 'SAPPHIRE', 'TRIPLE', 1131.17 , 2, 1, 'images/7900xtxsapphire.jpg'),
+    (33, 'A380', 'INTEL ARC', 'ASROCK', 'DUAL', 127.77, 2, 1, 'images/a380.jpg'),
+    (34, 'A580', 'INTEL ARC', 'ASROCK', 'DUAL', 199.58 , 2, 1, 'images/a580.jpg'),
+    (35, 'A770', 'INTEL ARC', 'ASROCK', 'DUAL', 328.28 , 2, 1, 'images/a770.jpg');
 
-
-
-delete from card;
-
-delete from cart_details;
 
 INSERT INTO carts(id,user_id)
 values

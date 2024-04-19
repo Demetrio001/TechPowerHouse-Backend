@@ -14,7 +14,7 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.List;
 
 @Service
-public class UserService implements UserServiceInterface{
+public class UserService implements UserServiceInterface {
     private final UserRepository userRepository;
     private final CartRepository cartRepository;
 
@@ -24,39 +24,51 @@ public class UserService implements UserServiceInterface{
         this.cartRepository = cartRepository;
     }
 
+    // Metodo per trovare tutti gli utenti
     @Override
     @Transactional(readOnly = true)
     public List<User> findAll() {
         return this.userRepository.findAll();
     }
 
+    // Metodo per trovare un utente per email
     @Override
     @Transactional(readOnly = true)
     public User findByEmail(String email) throws UserNotFoundException {
-        if(!this.userRepository.existsByEmail(email)) {
+        // Controlla se l'utente esiste tramite l'email fornita
+        if (!this.userRepository.existsByEmail(email)) {
             throw new UserNotFoundException();
         }
+        // Restituisce l'utente trovato
         return this.userRepository.findByEmail(email);
     }
 
+    // Metodo per registrare un nuovo utente
     @Override
     @Transactional
     public User register(RegistrationRequest registrationRequest) throws MailUserAlreadyExistsException,
             KeycloackRegistrationException {
+        // Ottiene l'utente dalla richiesta di registrazione
         User user = registrationRequest.getUser();
-        if(this.userRepository.existsByEmail(user.getEmail())) {
+        // Controlla se l'utente esiste già tramite l'email
+        if (this.userRepository.existsByEmail(user.getEmail())) {
             throw new MailUserAlreadyExistsException();
         }
         try {
+            // Registra l'utente tramite Keycloak
             Registration.keycloakRegistration(registrationRequest);
         } catch (KeycloackRegistrationException ke) {
+            // Gestisce eventuali eccezioni durante la registrazione
             throw new KeycloackRegistrationException();
         }
+        // Salva l'utente nel database
         User savedUser = this.userRepository.save(user);
+        // Crea un nuovo carrello per l'utente e lo associa
         Cart userCart = new Cart();
         userCart.setUser(savedUser);
         savedUser.setCart(this.cartRepository.save(userCart));
+        // Restituisce l'utente salvato
         return savedUser;
     }
-
 }
+
